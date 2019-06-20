@@ -34,5 +34,5 @@ def register_blueprints(app):
 
 
 def register_extensions(app):
-    from application.extensions import SSLify
-    sslify = SSLify(app)
+    from flask_sslify import SSLify
+    SSLify(app)
