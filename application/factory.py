@@ -13,6 +13,7 @@ def create_app(config_filename):
 
     register_errorhandlers(app)
     register_blueprints(app)
+    register_extensions(app)
 
     return app
 
