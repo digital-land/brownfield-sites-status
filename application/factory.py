@@ -31,3 +31,7 @@ def register_blueprints(app):
     from application.frontend.views import frontend
     app.register_blueprint(frontend)
 
+
+def register_extensions(app):
+    from application.extensions import SSLify
+    sslify = SSLify(app)
