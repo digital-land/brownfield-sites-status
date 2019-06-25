@@ -17,7 +17,7 @@ def fetch_results(url):
     except requests.ConnectionError:
         return "Connection Error"
 
-    data = json.loads(resp.text)
+    data = resp.json()
     items = data['Items']
     items.sort(key=lambda x: x['organisation'])
     return items
