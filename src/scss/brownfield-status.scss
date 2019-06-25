@@ -39,6 +39,11 @@ $govuk-green-colour:  #006435;
 
 }
 
+.center-align-cell {
+  padding-right: 0;
+  text-align: center;
+}
+
 .govuk-table__row--no-border {
   .govuk-table__cell {
     border-bottom: 0;
