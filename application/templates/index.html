@@ -8,7 +8,9 @@
   Validation status
 </h1>
 
-<table class="govuk-table">
+{%- set development_mode = request.args.get('development_mode') -%}
+
+<table class="govuk-table results-table">
 	<thead class="govuk-table__head">
 		<tr class="govuk-table__row validation-result-row">
 			<th class="govuk-table__header" colspan="2">Local Authority</th>
@@ -20,12 +22,12 @@
 	</thead>
 	<tbody class="govuk-table__body">
 		{% for item in data %}
-		<tr class="govuk-table__row">
+		<tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
 			<td class="govuk-table__cell" colspan="2">{{ item.organisation.S | map_la_code_to_name }}
 				<p class="see-register-link"><a href="{{ item['register-url']['S'] if item['register-url'] }}">See full register</a></p>
 			</td>
 			{%- if item.validated.NULL %}
-			<td class="govuk-table__cell result-cell--not-available" colspan="4">
+			<td class="govuk-table__cell result-cell--not-available" colspan="2">
 				<span class="validation-result-not-available">No results available</span>
 			</td>
 			{% else %}
@@ -40,7 +42,19 @@
 			{% endif %}
 
 		</tr>
+		{% if development_mode == 'true' %}
+		<tr class="govuk-table__row">
+			<td class="govuk-table__cell" colspan="6">
+				<div class="dev-output-row">
+					<span class="dev-output-title">Output:</span>
+					<div class="dev-output">{{ item }}</div>
+				</div>
+			</td>
+
+		</tr>
+		{% endif %}
 		{% endfor %}
+
 	</tbody>
 </table>
 

@@ -6,6 +6,10 @@ $govuk-images-path: "/static/govuk-frontend/assets/images/";
 
 $govuk-green-colour:  #006435;
 
+.results-table {
+  table-layout: fixed;
+}
+
 .result-cell {
   padding-right: 0;
   text-align: center;
@@ -33,4 +37,28 @@ $govuk-green-colour:  #006435;
     font-weight: 700;
   }
 
+}
+
+.govuk-table__row--no-border {
+  .govuk-table__cell {
+    border-bottom: 0;
+  }
+}
+
+.dev-output-row {
+  display: flex;
+}
+
+.dev-output-title {
+  padding-right: $govuk-gutter-half;
+  color: $govuk-secondary-text-colour;
+  font-size: govuk-em(16, 19);
+  font-weight: bolder;
+}
+
+.dev-output {
+  padding: 10px;
+  background: govuk-colour("grey-4");
+  font-size: govuk-em(16, 19);
+  word-break: break-word;
 }

@@ -5323,6 +5323,10 @@
   }
 }
 
+.results-table {
+  table-layout: fixed;
+}
+
 .result-cell {
   padding-right: 0;
   text-align: center;
@@ -5348,4 +5352,26 @@
   color: #ffbf47;
   background: rgba(255, 191, 71, 0.1);
   font-weight: 700;
+}
+
+.govuk-table__row--no-border .govuk-table__cell {
+  border-bottom: 0;
+}
+
+.dev-output-row {
+  display: flex;
+}
+
+.dev-output-title {
+  padding-right: 15px;
+  color: #6f777b;
+  font-size: 0.84211em;
+  font-weight: bolder;
+}
+
+.dev-output {
+  padding: 10px;
+  background: #f8f8f8;
+  font-size: 0.84211em;
+  word-break: break-word;
 }
