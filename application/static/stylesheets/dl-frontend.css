@@ -6228,3 +6228,9 @@ p {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.see-register-link {
+  display: inline-block;
+  margin: 0;
+  font-size: 0.84211em;
+}

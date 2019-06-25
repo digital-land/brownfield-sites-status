@@ -22,7 +22,7 @@
 		{% for item in data %}
 		<tr class="govuk-table__row">
 			<td class="govuk-table__cell" colspan="2">{{ item.organisation.S | map_la_code_to_name }}
-				<p class="full-results-link"><a href="{{ item['register-url']['S'] if item['register-url'] }}">See brownfield site register</a></p>
+				<p class="see-register-link"><a href="{{ item['register-url']['S'] if item['register-url'] }}">See full register</a></p>
 			</td>
 			{%- if item.validated.NULL %}
 			<td class="govuk-table__cell" colspan="4">
