@@ -1,0 +1,36 @@
+$govuk-fonts-path: "/static/govuk-frontend/assets/fonts/";
+$govuk-images-path: "/static/govuk-frontend/assets/images/";
+
+// import all GOVUK Frontend scss
+@import "all";
+
+$govuk-green-colour:  #006435;
+
+.result-cell {
+  padding-right: 0;
+  text-align: center;
+
+  &--not-available {
+    color: $govuk-secondary-text-colour;
+  }
+
+  &.successful {
+    color: $govuk-green-colour;
+    background: rgba($govuk-green-colour, .1);
+    font-weight: 700;
+  }
+
+  &.unsuccessful,
+  &.error {
+    color: govuk-colour("red");
+    background: rgba(govuk-colour("red") , .1);
+    font-weight: 700;
+  }
+
+  &.warning {
+    color: govuk-colour("yellow");
+    background: rgba(govuk-colour("yellow"), .1);
+    font-weight: 700;
+  }
+
+}

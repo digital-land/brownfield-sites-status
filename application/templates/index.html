@@ -25,14 +25,18 @@
 				<p class="see-register-link"><a href="{{ item['register-url']['S'] if item['register-url'] }}">See full register</a></p>
 			</td>
 			{%- if item.validated.NULL %}
-			<td class="govuk-table__cell" colspan="4">
+			<td class="govuk-table__cell result-cell--not-available" colspan="4">
 				<span class="validation-result-not-available">No results available</span>
 			</td>
 			{% else %}
-			<td class="govuk-table__cell">{{ item.validated.S.statusCode }}</td>
-			<td class="govuk-table__cell">{{ item.validated.S.isCsv }}</td>
-			<td class="govuk-table__cell">{{ item.validated.S.hasRequiredHeaders }}</td>
-			<td class="govuk-table__cell">{{ item.validated.S.isValid }}</td>
+			{% set statusCode = item.validated.S.statusCode|string %}
+			<td class="govuk-table__cell result-cell {{ 'successful' if statusCode == '200' else 'error' }}">{{ 'Yes' if statusCode == '200' else 'No' }}</td>
+			{% set isCSV = item.validated.S.isCsv|string %}
+			<td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
+			{% set hasHeaders = item.validated.S.hasRequiredHeaders|string %}
+			<td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
+			{% set isValid = item.validated.S.isValid|string %}
+			<td class="govuk-table__cell result-cell {{ 'successful' if isValid == 'True' else 'error' }}">{{ 'Yes' if isValid == 'True' else 'No' }}</td>
 			{% endif %}
 
 		</tr>
