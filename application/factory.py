@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
-import os
 from flask import Flask, render_template
 from flask.cli import load_dotenv
-
-from application.filters import (
-    map_la_code_to_name
-)
 
 load_dotenv()
 
@@ -39,6 +34,7 @@ def register_blueprints(app):
 
 
 def register_filters(app):
+    from application.filters import map_la_code_to_name
     app.add_template_filter(map_la_code_to_name)
 
 
