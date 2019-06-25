@@ -3,20 +3,21 @@ import requests
 
 from flask import (
     Blueprint,
-    render_template
+    render_template,
+    current_app
 )
 
 frontend = Blueprint('frontend', __name__, template_folder='templates')
 
 
-def fetch_results():
-    uri = "https://vuhjywgzu1.execute-api.eu-west-2.amazonaws.com/dev/status"
+def fetch_results(url):
+
     try:
-        uResponse = requests.get(uri)
+        resp = requests.get(url)
     except requests.ConnectionError:
         return "Connection Error"
 
-    data = json.loads(uResponse.text)
+    data = json.loads(resp.text)
     items = data['Items']
     items.sort(key=lambda x: x['organisation'])
     return items
@@ -24,7 +25,7 @@ def fetch_results():
 
 @frontend.route('/')
 def index():
-    return render_template('index.html', data=fetch_results())
+    return render_template('index.html', data=fetch_results(current_app.config['STATUS_API']))
 
 
 # set the assetPath variable for use in
