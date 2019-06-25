@@ -5,4 +5,42 @@
   Brownfield sites validation status
 </h1>
 
+<table class="govuk-table">
+	<thead class="govuk-table__head">
+		<tr class="govuk-table__row validation-result-row">
+			<th class="govuk-table__header" colspan="2">Local Authority</th>
+			<th class="govuk-table__header center-align-cell">URL exists</th>
+			<th class="govuk-table__header center-align-cell">Is CSV</th>
+			<th class="govuk-table__header center-align-cell">Has headers</th>
+			<th class="govuk-table__header center-align-cell">Valid</th>
+		</tr>
+	</thead>
+	<tbody class="govuk-table__body">
+		{% for item in data %}
+		<tr class="govuk-table__row">
+			<td class="govuk-table__cell" colspan="2">{{ item.organisation.S | map_la_code_to_name }}
+				<p class="full-results-link"><a href="{{ item['register-url']['S'] if item['register-url'] }}">See brownfield site register</a></p>
+			</td>
+			{%- if item.validated.NULL %}
+			<td class="govuk-table__cell" colspan="4">
+				<span class="validation-result-not-available">No results available</span>
+			</td>
+			{% else %}
+			<td class="govuk-table__cell">{{ item.validated.S.statusCode }}</td>
+			<td class="govuk-table__cell">{{ item.validated.S.isCsv }}</td>
+			<td class="govuk-table__cell">{{ item.validated.S.hasRequiredHeaders }}</td>
+			<td class="govuk-table__cell">{{ item.validated.S.isValid }}</td>
+			{% endif %}
+
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+	console.log('{{ data }}');
+</script>
 {% endblock %}

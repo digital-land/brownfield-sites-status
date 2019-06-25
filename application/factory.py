@@ -3,6 +3,10 @@ import os
 from flask import Flask, render_template
 from flask.cli import load_dotenv
 
+from application.filters import (
+    map_la_code_to_name
+)
+
 load_dotenv()
 
 
@@ -13,6 +17,7 @@ def create_app(config_filename):
 
     register_errorhandlers(app)
     register_blueprints(app)
+    register_filters(app)
     register_extensions(app)
 
     return app
@@ -31,6 +36,10 @@ def register_errorhandlers(app):
 def register_blueprints(app):
     from application.frontend.views import frontend
     app.register_blueprint(frontend)
+
+
+def register_filters(app):
+    app.add_template_filter(map_la_code_to_name)
 
 
 def register_extensions(app):
