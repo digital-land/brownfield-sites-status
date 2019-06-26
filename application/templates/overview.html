@@ -1,0 +1,51 @@
+{% extends "dlf-base.html" %}
+
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+<span class="govuk-caption-xl">Brownfield sites</span>
+<h1 class="govuk-heading-xl">
+  Status overview
+</h1>
+
+<div class="data-item">
+	<span class="data-item__number">{{ data.total }}</span>
+	<p class="govuk-body">Local authorities checked</p>
+</div>
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-one-quarter">
+		<div class="data-item">
+			<span class="data-item__number">{{ data.url }}</span>
+			<p class="govuk-body">URL exists</p>
+		</div>
+	</div>
+	<div class="govuk-grid-column-one-quarter">
+		<div class="data-item">
+			<span class="data-item__number">{{ data.csv }}</span>
+			<p class="govuk-body">Register is CSV</p>
+		</div>
+	</div>
+	<div class="govuk-grid-column-one-quarter">
+		<div class="data-item">
+			<span class="data-item__number">{{ data.headers }}</span>
+			<p class="govuk-body">Headings present</p>
+		</div>
+	</div>
+	<div class="govuk-grid-column-one-quarter">
+		<div class="data-item">
+			<span class="data-item__number">{{ data.valid }}</span>
+			<p class="govuk-body">Valid</p>
+		</div>
+	</div>
+</div>
+
+<a href="{{ url_for('frontend.overview') }}" class="govuk-link">See full breakdown by Local Authority</a>
+
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+	console.log('{{ data }}');
+</script>
+{% endblock %}
