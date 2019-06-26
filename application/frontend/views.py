@@ -1,4 +1,3 @@
-import json
 import requests
 
 from flask import (
@@ -22,7 +21,6 @@ def fetch_results(url):
 
 def fetch_sorted_results(url):
     data = fetch_results(url)
-    #items = 
     data['Items'].sort(key=lambda x: x['organisation'])
     return data
 
@@ -40,7 +38,7 @@ def summarise_results(url):
             summary['headers'] += 1
         if i['validated']['isValid'] is True:
             summary['valid'] += 1
-    return { "last_updated": data['last_updated'], "summary": summary }
+    return {"last_updated": data['last_updated'], "summary": summary}
 
 
 @frontend.route('/')
