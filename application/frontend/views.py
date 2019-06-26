@@ -42,14 +42,15 @@ def summarise_results(url):
             summary['valid'] += 1
     return summary
 
+
 @frontend.route('/')
 def index():
-    return render_template('index.html', data=fetch_sorted_results(current_app.config['STATUS_API']))
-
-
-@frontend.route('/overview')
-def overview():
     return render_template('overview.html', data=summarise_results(current_app.config['STATUS_API']))
+
+
+@frontend.route('/breakdown')
+def breakdown():
+    return render_template('breakdown.html', data=fetch_sorted_results(current_app.config['STATUS_API']))
 
 
 # set the assetPath variable for use in

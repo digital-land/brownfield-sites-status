@@ -67,3 +67,8 @@ $govuk-green-colour:  #006435;
   font-size: govuk-em(16, 19);
   word-break: break-word;
 }
+
+.data-item,
+.data-item__number {
+  @include govuk-typography-common;
+}

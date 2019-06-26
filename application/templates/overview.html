@@ -3,44 +3,48 @@
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
-<span class="govuk-caption-xl">Brownfield sites</span>
+<span class="govuk-caption-xl">Brownfield site registers</span>
 <h1 class="govuk-heading-xl">
   Status overview
 </h1>
 
-<div class="data-item">
-	<span class="data-item__number">{{ data.total }}</span>
-	<p class="govuk-body">Local authorities checked</p>
+<div class="data-item govuk-!-margin-bottom-6">
+	<span class="data-item__number govuk-!-font-size-80">{{ data.total }}</span>
+	<p class="govuk-body govuk-!-font-size-36">Local authorities checked</p>
 </div>
 
-<div class="govuk-grid-row">
+<div class="govuk-grid-row govuk-!-margin-bottom-9">
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number">{{ data.url }}</span>
-			<p class="govuk-body">URL exists</p>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.url }}</span>
+			<p class="govuk-body govuk-!-font-size-24">URL exists</p>
 		</div>
 	</div>
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number">{{ data.csv }}</span>
-			<p class="govuk-body">Register is CSV</p>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.csv }}</span>
+			<p class="govuk-body govuk-!-font-size-24">Register is CSV</p>
 		</div>
 	</div>
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number">{{ data.headers }}</span>
-			<p class="govuk-body">Headings present</p>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.headers }}</span>
+			<p class="govuk-body govuk-!-font-size-24">Headings present</p>
 		</div>
 	</div>
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number">{{ data.valid }}</span>
-			<p class="govuk-body">Valid</p>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.valid }}</span>
+			<p class="govuk-body govuk-!-font-size-24">Valid</p>
 		</div>
 	</div>
 </div>
 
-<a href="{{ url_for('frontend.overview') }}" class="govuk-link">See full breakdown by Local Authority</a>
+<p class="govuk-body"><span>Last update:</span> (Jake to fill in here)</p>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+<a href="{{ url_for('frontend.breakdown') }}" class="govuk-link govuk-!-font-size-24">See full breakdown by Local Authority</a>
 
 {% endblock %}
 

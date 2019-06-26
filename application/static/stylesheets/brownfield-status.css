@@ -5380,3 +5380,17 @@
   font-size: 0.84211em;
   word-break: break-word;
 }
+
+.data-item,
+.data-item__number {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media print {
+  .data-item,
+  .data-item__number {
+    font-family: sans-serif;
+  }
+}
