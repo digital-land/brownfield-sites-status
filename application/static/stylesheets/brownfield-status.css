@@ -5368,10 +5368,10 @@
 }
 
 .dev-output-title {
+  padding-top: 9px;
   padding-right: 15px;
   color: #6f777b;
   font-size: 0.84211em;
-  font-weight: bolder;
 }
 
 .dev-output {

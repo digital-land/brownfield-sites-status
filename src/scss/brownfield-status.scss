@@ -55,10 +55,10 @@ $govuk-green-colour:  #006435;
 }
 
 .dev-output-title {
+  padding-top: 9px;
   padding-right: $govuk-gutter-half;
   color: $govuk-secondary-text-colour;
   font-size: govuk-em(16, 19);
-  font-weight: bolder;
 }
 
 .dev-output {
