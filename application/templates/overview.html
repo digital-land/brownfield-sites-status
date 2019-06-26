@@ -9,42 +9,42 @@
 </h1>
 
 <div class="data-item govuk-!-margin-bottom-6">
-	<span class="data-item__number govuk-!-font-size-80">{{ data.total }}</span>
+	<span class="data-item__number govuk-!-font-size-80">{{ data.summary.total }}</span>
 	<p class="govuk-body govuk-!-font-size-36">Local authorities checked</p>
 </div>
 
 <div class="govuk-grid-row govuk-!-margin-bottom-9">
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number govuk-!-font-size-48">{{ data.url }}</span>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.summary.url }}</span>
 			<p class="govuk-body govuk-!-font-size-24">URL OK</p>
 		</div>
 	</div>
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number govuk-!-font-size-48">{{ data.csv }}</span>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.summary.csv }}</span>
 			<p class="govuk-body govuk-!-font-size-24">Register is CSV</p>
 		</div>
 	</div>
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number govuk-!-font-size-48">{{ data.headers }}</span>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.summary.headers }}</span>
 			<p class="govuk-body govuk-!-font-size-24">Columns present</p>
 		</div>
 	</div>
 	<div class="govuk-grid-column-one-quarter">
 		<div class="data-item">
-			<span class="data-item__number govuk-!-font-size-48">{{ data.valid }}</span>
+			<span class="data-item__number govuk-!-font-size-48">{{ data.summary.valid }}</span>
 			<p class="govuk-body govuk-!-font-size-24">Data valid</p>
 		</div>
 	</div>
 </div>
 
-<p class="govuk-body"><span>Last update:</span> (Jake to fill in here)</p>
+<a href="{{ url_for('frontend.breakdown') }}" class="govuk-link govuk-!-font-size-24">See full breakdown by Local Authority</a>
 
 <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
-<a href="{{ url_for('frontend.breakdown') }}" class="govuk-link govuk-!-font-size-24">See full breakdown by Local Authority</a>
+<p class="govuk-body"><span>Last updated:</span> {{ data.last_updated }}</p>
 
 {% endblock %}
 

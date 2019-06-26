@@ -10,6 +10,8 @@
 
 {%- set development_mode = request.args.get('development_mode') -%}
 
+<p class="govuk-body"><span>Last updated:</span> {{ data.last_updated }}</p>
+
 <table class="govuk-table results-table">
 	<thead class="govuk-table__head">
 		<tr class="govuk-table__row validation-result-row">
@@ -21,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody class="govuk-table__body">
-		{% for item in data %}
+		{% for item in data['Items'] %}
 		<tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
 			<td class="govuk-table__cell" colspan="2">{{ item.organisation | map_la_code_to_name }}
 				<p class="see-register-link"><a href="{{ item['register-url'] if item['register-url'] }}">See full register</a></p>

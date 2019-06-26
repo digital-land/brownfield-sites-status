@@ -22,9 +22,9 @@ def fetch_results(url):
 
 def fetch_sorted_results(url):
     data = fetch_results(url)
-    items = data['Items']
-    items.sort(key=lambda x: x['organisation'])
-    return items
+    #items = 
+    data['Items'].sort(key=lambda x: x['organisation'])
+    return data
 
 
 def summarise_results(url):
@@ -40,7 +40,7 @@ def summarise_results(url):
             summary['headers'] += 1
         if i['validated']['isValid'] is True:
             summary['valid'] += 1
-    return summary
+    return { "last_updated": data['last_updated'], "summary": summary }
 
 
 @frontend.route('/')
