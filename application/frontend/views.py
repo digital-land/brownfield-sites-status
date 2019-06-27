@@ -51,6 +51,12 @@ def breakdown():
     return render_template('breakdown.html', data=fetch_sorted_results(current_app.config['STATUS_API']))
 
 
+@frontend.route('/local-authority/<local_authority_id>')
+def individual_result(local_authority_id):
+    uri = current_app.config['STATUS_API'] + "?organisation=" + local_authority_id
+    return render_template('validation-result.html', data=fetch_results(uri))
+
+
 # set the assetPath variable for use in
 # jinja templates
 @frontend.context_processor

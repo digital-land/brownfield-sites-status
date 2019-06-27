@@ -1,0 +1,21 @@
+{% extends "dlf-base.html" %}
+
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+<span class="govuk-caption-xl">Validation result</span>
+<h1 class="govuk-heading-xl">
+  {{ data.organisation | map_la_code_to_name }}
+</h1>
+
+<h3 class="govuk-heading-s">Output</h3>
+
+<div class="dev-output">{{ data }}</div>
+
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+	console.log('{{ data }}');
+</script>
+{% endblock %}
