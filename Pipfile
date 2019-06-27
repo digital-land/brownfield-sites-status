@@ -20,6 +20,8 @@ chardet = "*"
 idna = "*"
 requests = "*"
 urllib3 = "*"
+flask-migrate = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"

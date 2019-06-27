@@ -8,9 +8,25 @@
   {{ data.organisation | map_la_code_to_name }}
 </h1>
 
-<h3 class="govuk-heading-s">Output</h3>
+<h3 class="govuk-heading-s">Validation result details</h3>
 
-<div class="dev-output">{{ data }}</div>
+
+    <p class="govuk-body">
+        This will be the detailed validation result from the validator. It will be the full result for the
+        latest validation run for {{ data.organisation | map_la_code_to_name }}.
+    </p>
+
+    <p class="govuk-body">It's up to this application to format the results.</p>
+
+    <p class="govuk-body">
+        The api will need to provide an endpoint to get full validation results for the latest run of the
+        validator for this council.
+    </p>
+
+    <p class="govuk-body">
+        This will be the details of the result listed for this authority in the breakdown page. In other words the results
+    should line up correctly.
+    </p>
 
 {% endblock %}
 

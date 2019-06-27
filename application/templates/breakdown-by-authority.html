@@ -1,0 +1,62 @@
+{% extends "dlf-base.html" %}
+
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block content %}
+<span class="govuk-caption-xl">Validation history</span>
+<h1 class="govuk-heading-xl">
+  {{ local_authority_id | map_la_code_to_name }}
+</h1>
+
+{%- set development_mode = request.args.get('development_mode') -%}
+
+ {% if development_mode == 'true' %}
+     <h2 class="govuk-heading-m">History of validation results fetched from api url</h2>
+    <p class="govuk-body"> {{ url }}</p>
+  {% endif %}
+
+<table class="govuk-table results-table">
+	<thead class="govuk-table__head">
+		<tr class="govuk-table__row validation-result-row">
+            <th class="govuk-table__header center-align-cell">Date of validation</th>
+			<th class="govuk-table__header center-align-cell">URL OK</th>
+			<th class="govuk-table__header center-align-cell">Register in CSV format</th>
+			<th class="govuk-table__header center-align-cell">Column headers present</th>
+			<th class="govuk-table__header center-align-cell">Data valid</th>
+		</tr>
+	</thead>
+	<tbody class="govuk-table__body">
+		{% for result in data.results %}
+            <tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
+                <td class="govuk-table__cell result-cell">{{ result.date }}</td>
+                {% set statusCode = result.validated.statusCode|string %}
+                <td class="govuk-table__cell result-cell {{ 'successful' if statusCode == '200' else 'error' }}">{{ 'Yes' if statusCode == '200' else 'No' }}</td>
+                {% set isCSV = result.validated.isCsv|string %}
+                <td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
+                {% set hasHeaders = result.validated.hasRequiredHeaders|string %}
+                <td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
+                {% set isValid = result.validated.isValid|string %}
+                <td class="govuk-table__cell result-cell {{ 'successful' if isValid == 'True' else 'error' }}">{{ 'Yes' if isValid == 'True' else 'No' }}</td>
+            </tr>
+            {% if development_mode == 'true' %}
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell" colspan="6">
+                        <div class="dev-output-row">
+                            <span class="dev-output-title">Output:</span>
+                            <div class="dev-output">{{ result }}</div>
+                        </div>
+                    </td>
+                </tr>
+		    {% endif %}
+		{% endfor %}
+
+	</tbody>
+</table>
+
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+	console.log('{{ data }}');
+</script>
+{% endblock %}

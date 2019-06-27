@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 from flask.cli import load_dotenv
 
+
 load_dotenv()
 
 
@@ -41,3 +42,10 @@ def register_filters(app):
 def register_extensions(app):
     from flask_sslify import SSLify
     SSLify(app)
+
+    from application.extensions import db
+    db.init_app(app)
+
+    from application.models import Cache
+    from application.extensions import migrate
+    migrate.init_app(app=app)

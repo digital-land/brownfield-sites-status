@@ -27,7 +27,20 @@
 		<tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
 			<td class="govuk-table__cell" colspan="2">{{ item.organisation | map_la_code_to_name }}
 				<p class="see-register-link"><a href="{{ item['register-url'] if item['register-url'] }}">See full register</a></p>
-			</td>
+                {% if development_mode == 'true' %}
+                    <p>Other pages to link to</p>
+                    <ul>
+                        <li><a href="{{ url_for('frontend.local_authority_results', local_authority_id=item.organisation, development_mode=development_mode) }}">
+                            History of validations for this council
+                            </a>
+                        </li>
+                        <li><a href="{{ url_for('frontend.result_details_for_authority', local_authority_id=item.organisation) }}">
+                            Latest validation result details
+                            </a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </td>
 			{%- if item.validated.NULL %}
 			<td class="govuk-table__cell result-cell--not-available center-align-cell" colspan="4">
 				<span class="validation-result-not-available">No results available</span>
@@ -45,15 +58,14 @@
 
 		</tr>
 		{% if development_mode == 'true' %}
-		<tr class="govuk-table__row">
-			<td class="govuk-table__cell" colspan="6">
-				<div class="dev-output-row">
-					<span class="dev-output-title">Output:</span>
-					<div class="dev-output">{{ item }}</div>
-				</div>
-			</td>
-
-		</tr>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell" colspan="6">
+                    <div class="dev-output-row">
+                        <span class="dev-output-title">Output:</span>
+                        <div class="dev-output">{{ item }}</div>
+                    </div>
+                </td>
+            </tr>
 		{% endif %}
 		{% endfor %}
 

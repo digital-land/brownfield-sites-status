@@ -1,3 +1,5 @@
-from flask_sslify import SSLify
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
-sslify = SSLify()
+from flask_migrate import Migrate
+migrate = Migrate(db=db)
