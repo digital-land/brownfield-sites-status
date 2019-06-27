@@ -29,15 +29,16 @@ def summarise_results(url):
     summary = {"total": 0, "url": 0, "csv": 0, "headers": 0, "valid": 0}
     data = fetch_results(url)
     for i in data['Items']:
-        summary['total'] += 1
-        if i['validated']['statusCode'] is 200:
-            summary['url'] += 1
-        if i['validated']['isCsv'] is True:
-            summary['csv'] += 1
-        if i['validated']['hasRequiredHeaders'] is True:
-            summary['headers'] += 1
-        if i['validated']['isValid'] is True:
-            summary['valid'] += 1
+        if i['validated'] is not None:
+            summary['total'] += 1
+            if i['validated']['statusCode'] is 200:
+                summary['url'] += 1
+            if i['validated']['isCsv'] is True:
+                summary['csv'] += 1
+            if i['validated']['hasRequiredHeaders'] is True:
+                summary['headers'] += 1
+            if i['validated']['isValid'] is True:
+                summary['valid'] += 1
     return {"last_updated": data['last_updated'], "summary": summary}
 
 
