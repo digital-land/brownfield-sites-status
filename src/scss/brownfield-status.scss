@@ -72,3 +72,9 @@ $govuk-green-colour:  #006435;
 .data-item__number {
   @include govuk-typography-common;
 }
+
+.test-result-link {
+  display: block;
+  font-size: govuk-em(16, 19);
+  font-weight: 400;
+}

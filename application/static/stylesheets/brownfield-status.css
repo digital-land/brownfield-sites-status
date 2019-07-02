@@ -5394,3 +5394,9 @@
     font-family: sans-serif;
   }
 }
+
+.test-result-link {
+  display: block;
+  font-size: 0.84211em;
+  font-weight: 400;
+}
