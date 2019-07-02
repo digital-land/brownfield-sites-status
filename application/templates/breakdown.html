@@ -50,12 +50,27 @@
                     <td class="govuk-table__cell result-cell successful">Yes
                         <span class="test-result-link">(<a href="{{ item['register-url'] if item['register-url']}}">Download<span class="govuk-visually-hidden"> {{ item.organisation | map_la_code_to_name }} brownfield land register</span></a>)</span>
                     </td>
-                     {% set isCSV = item.validated.isCsv|string %}
-                    <td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
-                    {% set hasHeaders = item.validated.hasRequiredHeaders|string %}
-                    <td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
-                    {% set isValid = item.validated.isValid|string %}
-                    <td class="govuk-table__cell result-cell {{ 'successful' if isValid == 'True' else 'error' }}">{{ 'Yes' if isValid == 'True' else 'No' }}</td>
+
+                    {%- set isCSV = item.validated.isCsv|string %}
+                   	<td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
+
+                    {%- if isCSV == 'True' -%}
+
+											{% set hasHeaders = item.validated.hasRequiredHeaders|string %}
+	                    <td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
+
+	                    {%- if hasHeaders == 'True' -%}
+		                    {% set isValid = item.validated.isValid|string %}
+		                    <td class="govuk-table__cell result-cell {{ 'successful' if isValid == 'True' else 'error' }}">{{ 'Yes' if isValid == 'True' else 'No' }}</td>
+		                  {%- else -%}
+		                  	<td class="govuk-table__cell result-cell error">-</td>
+		                  {%- endif -%}
+
+                    {%- else -%}
+	                    <td class="govuk-table__cell result-cell error">-</td>
+	                    <td class="govuk-table__cell result-cell error">-</td>
+                    {%- endif -%}
+                    
 
                 {% else %}
                     <td class="govuk-table__cell result-cell error">No</td>
