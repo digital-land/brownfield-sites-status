@@ -47,8 +47,8 @@
 			{% else %}
 
                 {% if item.validated.statusCode == 200 %}
-                    <td class="govuk-table__cell result-cell successful">
-                        <a href="{{ item['register-url'] if item['register-url']}}">Yes</a>
+                    <td class="govuk-table__cell result-cell successful">Yes
+                        <span class="test-result-link">(<a href="{{ item['register-url'] if item['register-url']}}">Download<span class="govuk-visually-hidden"> {{ item.organisation | map_la_code_to_name }} brownfield land register</span></a>)</span>
                     </td>
                      {% set isCSV = item.validated.isCsv|string %}
                     <td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
