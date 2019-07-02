@@ -27,43 +27,42 @@ def cache_result(url, data):
 
 
 def fetch_results(url):
-
     try:
         cache = get_cached_result(url, for_date=datetime.today().date())
-        data = cache.data
+        return cache.data
     except NoResultFound as e:
         current_app.logger.exception(e)
         current_app.logger.info('No cached results')
-
     try:
         resp = requests.get(url)
         resp.raise_for_status()
         data = resp.json()
         cache_result(url, data)
-
+        return data
     except Exception as e:
-        data = get_cached_result(url)
-
-    return data
+        print(e)
+        return {}
 
 
 def sort_results(data):
-    data['Items'].sort(key=lambda x: x['organisation'])
+    if data.get('Items') is not None:
+        data['Items'].sort(key=lambda x: x['organisation'])
     return data
 
 
 def summarise_results(url):
     summary = {"total": 0, "url": 0, "csv": 0, "headers": 0, "valid": 0}
     data = fetch_results(url)
-    for i in data['Items']:
-        if i['validated'] is not None:
-            summary['total'] += 1
-            if i['validated']['statusCode'] is 200:
-                summary['url'] += 1
-            if i['validated']['isCsv'] is True:
-                summary['csv'] += 1
-            if i['validated']['hasRequiredHeaders'] is True:
-                summary['headers'] += 1
-            if i['validated']['isValid'] is True:
-                summary['valid'] += 1
-    return {"last_updated": data['last_updated'], "summary": summary}
+    if data.get('Items') is not None:
+        for i in data['Items']:
+            if i['validated'] is not None:
+                summary['total'] += 1
+                if i['validated']['statusCode'] is 200:
+                    summary['url'] += 1
+                if i['validated']['isCsv'] is True:
+                    summary['csv'] += 1
+                if i['validated']['hasRequiredHeaders'] is True:
+                    summary['headers'] += 1
+                if i['validated']['isValid'] is True:
+                    summary['valid'] += 1
+    return {"last_updated": data.get('last_updated', datetime.today().date()), "summary": summary}

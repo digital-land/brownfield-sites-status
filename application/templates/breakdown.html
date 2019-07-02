@@ -25,20 +25,9 @@
 	<tbody class="govuk-table__body">
 		{% for item in data['Items'] %}
 		<tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
-			<td class="govuk-table__cell" colspan="2">{{ item.organisation | map_la_code_to_name }}
-                {% if development_mode == 'true' %}
-                    <p>Other pages to link to</p>
-                    <ul>
-                        <li><a href="{{ url_for('frontend.local_authority_results', local_authority_id=item.organisation, development_mode=development_mode) }}">
-                            History of validations for this council
-                            </a>
-                        </li>
-                        <li><a href="{{ url_for('frontend.result_details_for_authority', local_authority_id=item.organisation) }}">
-                            Latest validation result details
-                            </a>
-                        </li>
-                    </ul>
-                {% endif %}
+			<td class="govuk-table__cell" colspan="2">
+                {{ item.organisation | map_la_code_to_name }}
+                <p class="govuk-body-s"><a href="{{ url_for('frontend.local_authority_results', local_authority_id=item.organisation, development_mode=development_mode) }}">See past results</a></p>
             </td>
 			{%- if not item.validated %}
                 <td class="govuk-table__cell result-cell--not-available center-align-cell" colspan="4">
