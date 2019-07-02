@@ -55,7 +55,7 @@
                                 <td class="govuk-table__cell result-cell successful">Yes</td>
                                 {% else %}
                                 <td class="govuk-table__cell result-cell error">No
-                                    <span class="test-result-link">(<a href="{{ url_for('frontend.result_details_for_authority', local_authority_id=item.organisation) }}"><span class="govuk-visually-hidden">See { item.organisation | map_la_code_to_name }} register validation </span>Results</a>)</span>
+{#                                    <span class="test-result-link">(<a href="{{ url_for('frontend.result_details_for_authority', local_authority_id=item.organisation) }}"><span class="govuk-visually-hidden">See { item.organisation | map_la_code_to_name }} register validation </span>Results</a>)</span>#}
                                 </td>
                                 {% endif %}
                               {%- else -%}
