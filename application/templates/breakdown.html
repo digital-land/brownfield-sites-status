@@ -60,8 +60,13 @@
 	                    <td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
 
 	                    {%- if hasHeaders == 'True' -%}
-		                    {% set isValid = item.validated.isValid|string %}
-		                    <td class="govuk-table__cell result-cell {{ 'successful' if isValid == 'True' else 'error' }}">{{ 'Yes' if isValid == 'True' else 'No' }}</td>
+		                    {% if item.validated.isValid|string == 'True' %}
+		                    <td class="govuk-table__cell result-cell successful">Yes</td>
+		                    {% else %}
+		                    <td class="govuk-table__cell result-cell error">No
+		                    	<span class="test-result-link">(<a href="{{ url_for('frontend.result_details_for_authority', local_authority_id=item.organisation) }}"><span class="govuk-visually-hidden">See { item.organisation | map_la_code_to_name }} register validation </span>Results</a>)</span>
+		                    </td>
+		                    {% endif %}
 		                  {%- else -%}
 		                  	<td class="govuk-table__cell result-cell error">-</td>
 		                  {%- endif -%}
