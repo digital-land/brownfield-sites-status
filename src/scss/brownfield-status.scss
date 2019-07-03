@@ -4,6 +4,8 @@ $govuk-images-path: "/static/govuk-frontend/assets/images/";
 // import all GOVUK Frontend scss
 @import "all";
 
+@import "components/tags";
+
 $govuk-green-colour:  #006435;
 
 .results-table {

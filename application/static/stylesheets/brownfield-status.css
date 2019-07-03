@@ -5323,6 +5323,25 @@
   }
 }
 
+.govuk-tag--error {
+  background-color: #b10e1e;
+}
+
+.govuk-tag--warning {
+  background-color: #ffbf47;
+}
+
+.dl-tag {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background: #dee0e2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .results-table {
   table-layout: fixed;
 }

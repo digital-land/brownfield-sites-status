@@ -6,6 +6,7 @@ from flask import (
 
 from application.frontend.utils import (
     fetch_results,
+    fetch_validation_result,
     summarise_results,
     sort_results
 )
@@ -27,7 +28,9 @@ def breakdown():
 @frontend.route('/local-authority/<local_authority_id>/result-details')
 def result_details_for_authority(local_authority_id):
     # TODO we need a url for full result for latest validation run for this planning authority with all errors
-    return render_template('validation-result.html', data={'organisation': local_authority_id})
+    url = current_app.config['STATUS_API'] + '/?organisation=' + local_authority_id
+    result_data = fetch_validation_result(url)
+    return render_template('validation-result.html', data={'organisation': local_authority_id, 'url': url, 'result': result_data})
 
 
 @frontend.route('/local-authority/<local_authority_id>')

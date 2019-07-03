@@ -8,25 +8,33 @@
   {{ data.organisation | map_la_code_to_name }}
 </h1>
 
-<h3 class="govuk-heading-s">Validation result details</h3>
+<p class="govuk-body"><span>Last updated:</span> {{ data.result.last_updated }}</p>
+<p class="govuk-body"><a href="{{ data.url }}">See raw results</a></p>
 
+{% if data.result.latestValidationResult | length > 0 %}
 
-    <p class="govuk-body">
-        This will be the detailed validation result from the validator. It will be the full result for the
-        latest validation run for {{ data.organisation | map_la_code_to_name }}.
-    </p>
+	<h2 class="govuk-heading-l">Row by row errors</h2>
 
-    <p class="govuk-body">It's up to this application to format the results.</p>
+	<ul class="govuk-list">
+	{% for row in data.result.latestValidationResult %}
+		{% set row_number = loop.index %}
 
-    <p class="govuk-body">
-        The api will need to provide an endpoint to get full validation results for the latest run of the
-        validator for this council.
-    </p>
+		{% if row.validator.isRowValid == false %}
+		<li>
+			<ul class="govuk-list">
+				{% for error in row.validator.rowErrors %}
+				<li><span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error.message }}</li>
+				{% endfor %}
+			</ul>
+		</li>
+		{% endif %}
 
-    <p class="govuk-body">
-        This will be the details of the result listed for this authority in the breakdown page. In other words the results
-    should line up correctly.
-    </p>
+	{% endfor %}
+	</ul>
+
+{% else %}
+	No results available
+{% endif %}
 
 {% endblock %}
 
