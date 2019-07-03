@@ -18,7 +18,7 @@
 <table class="govuk-table results-table">
 	<thead class="govuk-table__head">
 		<tr class="govuk-table__row validation-result-row">
-            <th class="govuk-table__header center-align-cell">Date of validation</th>
+            <th class="govuk-table__header">Date of validation</th>
             <th class="govuk-table__header center-align-cell">Register downloadable</th>
 			<th class="govuk-table__header center-align-cell">Register in CSV format</th>
 			<th class="govuk-table__header center-align-cell">CSV headers correct</th>
@@ -26,30 +26,57 @@
 		</tr>
 	</thead>
 	<tbody class="govuk-table__body">
-		{% for result in data.results %}
-            <tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
-                <td class="govuk-table__cell result-cell">{{ result.date }}</td>
-                {% set statusCode = result.validated.statusCode|string %}
-                <td class="govuk-table__cell result-cell {{ 'successful' if statusCode == '200' else 'error' }}">{{ 'Yes' if statusCode == '200' else 'No' }}</td>
-                {% set isCSV = result.validated.isCsv|string %}
-                <td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
-                {% set hasHeaders = result.validated.hasRequiredHeaders|string %}
-                <td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
-                {% set isValid = result.validated.isValid|string %}
-                <td class="govuk-table__cell result-cell {{ 'successful' if isValid == 'True' else 'error' }}">{{ 'Yes' if isValid == 'True' else 'No' }}</td>
-            </tr>
-            {% if development_mode == 'true' %}
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell" colspan="6">
-                        <div class="dev-output-row">
-                            <span class="dev-output-title">Output:</span>
-                            <div class="dev-output">{{ result }}</div>
-                        </div>
+	    {% for item in data.results %}
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">
+                    {{ item.date }}
+                </td>
+                {%- if not item.validated %}
+                    <td class="govuk-table__cell result-cell--not-available center-align-cell" colspan="4">
+                        <span class="validation-result-not-available">No results available</span>
                     </td>
-                </tr>
-		    {% endif %}
-		{% endfor %}
+                {% else %}
 
+                    {% if item.validated.statusCode == 200 %}
+                        <td class="govuk-table__cell result-cell successful">Yes
+                            <span class="test-result-link">(<a href="{{ item['register-url'] if item['register-url']}}">Download<span class="govuk-visually-hidden"> {{ item.organisation | map_la_code_to_name }} brownfield land register</span></a>)</span>
+                        </td>
+
+                        {%- set isCSV = item.validated.isCsv|string %}
+                        <td class="govuk-table__cell result-cell {{ 'successful' if isCSV == 'True' else 'error' }}">{{ 'Yes' if isCSV == 'True' else 'No' }}</td>
+
+                        {%- if isCSV == 'True' -%}
+
+                            {% set hasHeaders = item.validated.hasRequiredHeaders|string %}
+                            <td class="govuk-table__cell result-cell {{ 'successful' if hasHeaders== 'True' else 'error' }}">{{ 'Yes' if hasHeaders == 'True' else 'No' }}</td>
+
+                            {%- if hasHeaders == 'True' -%}
+                                {% if item.validated.isValid|string == 'True' %}
+                                <td class="govuk-table__cell result-cell successful">Yes</td>
+                                {% else %}
+                                <td class="govuk-table__cell result-cell error">No
+{#                                    <span class="test-result-link">(<a href="{{ url_for('frontend.result_details_for_authority', local_authority_id=item.organisation) }}"><span class="govuk-visually-hidden">See { item.organisation | map_la_code_to_name }} register validation </span>Results</a>)</span>#}
+                                </td>
+                                {% endif %}
+                              {%- else -%}
+                                <td class="govuk-table__cell result-cell error">-</td>
+                              {%- endif -%}
+
+                        {%- else -%}
+                            <td class="govuk-table__cell result-cell error">-</td>
+                            <td class="govuk-table__cell result-cell error">-</td>
+                        {%- endif -%}
+
+                    {% else %}
+                        <td class="govuk-table__cell result-cell error">No</td>
+                        <td class="govuk-table__cell result-cell error">-</td>
+                        <td class="govuk-table__cell result-cell error">-</td>
+                        <td class="govuk-table__cell result-cell error">-</td>
+                    {% endif %}
+
+                {% endif %}
+            </tr>
+		{% endfor %}
 	</tbody>
 </table>
 
