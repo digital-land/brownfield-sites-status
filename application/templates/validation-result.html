@@ -4,6 +4,11 @@
 
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
+{% block beforeContent %}
+{{ super()}}
+<a href="{{ url_for('frontend.breakdown') }}" class="govuk-back-link">Back to full list</a>
+{% endblock %}
+
 {% block content %}
 
 {%- set development_mode = request.args.get('development_mode') -%}
