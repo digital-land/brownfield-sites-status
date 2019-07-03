@@ -1,8 +1,12 @@
 {% extends "dlf-base.html" %}
 
+{% from "./govuk-jinja-components/details/macro.jinja" import govukDetails -%}
+
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
+
+{%- set development_mode = request.args.get('development_mode') -%}
 
 <div class="govuk-grid-row">
 	<div class="govuk-grid-column-two-thirds">
@@ -47,7 +51,21 @@
 				<li>
 					<ul id="row-{{ row_number }}-errors" class="govuk-list">
 						{% for error in row.validator.rowErrors %}
-						<li><span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error.message }}</li>
+						<li>
+							<span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error.message }}
+							{%- if development_mode == 'true' -%}
+								{% set cell_name = error.dataPath | strip('.') %}
+								{%- set innerHtml -%}
+								<div>Value: {{ row[cell_name] }}</div>
+								<div>Output: {{ error }}</div>
+								{%- endset -%}
+
+								{{ govukDetails({
+								  "summaryText": "Validator output",
+								  "text": innerHtml
+								}) }}
+							{%- endif -%}
+						</li>
 						{% endfor %}
 					</ul>
 				</li>
