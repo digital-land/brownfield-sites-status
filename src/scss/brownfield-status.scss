@@ -89,3 +89,19 @@ $govuk-green-colour:  #006435;
   color: $govuk-secondary-text-colour;
   @include govuk-font(19);
 }
+
+.metadata-wrapper {
+  margin-right: $govuk-gutter-half;
+  margin-bottom: 1.5 * $govuk-gutter;
+  margin-left: $govuk-gutter-half;
+  padding-top: $govuk-gutter-half;
+  border-top: 1px solid $govuk-border-colour;
+}
+
+.metadata__item {
+  @include govuk-font(16);
+}
+
+.lead-para {
+  @include govuk-responsive-margin(9, "bottom");
+}

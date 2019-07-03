@@ -5453,3 +5453,52 @@
     line-height: 1.15;
   }
 }
+
+.metadata-wrapper {
+  margin-right: 15px;
+  margin-bottom: 45px;
+  margin-left: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #bfc1c3;
+}
+
+.metadata__item {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.14286;
+}
+
+@media print {
+  .metadata__item {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .metadata__item {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .metadata__item {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.lead-para {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 40.0625em) {
+  .lead-para {
+    margin-bottom: 60px;
+  }
+}

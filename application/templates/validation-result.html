@@ -3,13 +3,24 @@
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
-<span class="govuk-caption-xl">Validation result</span>
-<h1 class="govuk-heading-xl">
-  {{ data.organisation | map_la_code_to_name }}
-</h1>
 
-<p class="govuk-body"><span>Last updated:</span> {{ data.result.last_updated }}</p>
-<p class="govuk-body"><a href="{{ data.url }}">See raw results</a></p>
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<span class="govuk-caption-xl">Validation result</span>
+		<h1 class="govuk-heading-xl">
+		  {{ data.organisation | map_la_code_to_name }}
+		</h1>
+
+		<p class="govuk-body-l lead-para">The brownfield land register for {{ data.organisation | map_la_code_to_name }} contains errors.</p>
+	</div>
+</div>
+
+<div class="govuk-grid-row">
+	<div class="metadata-wrapper">
+		<div class="metadata__item"><span>Last updated:</span> {{ data.result.last_updated }}</div>
+		<div class="metadata__item"><a href="{{ data.url }}">See raw results</a></div>
+	</div>
+</div>
 
 {% if data.result.latestValidationResult | length > 0 %}
 
