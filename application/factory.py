@@ -39,6 +39,8 @@ def register_filters(app):
     app.add_template_filter(map_la_code_to_name)
     from application.filters import strip
     app.add_template_filter(strip)
+    from application.filters import display_error_message
+    app.add_template_filter(display_error_message)
 
 
 def register_extensions(app):
