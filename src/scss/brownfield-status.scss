@@ -4,6 +4,8 @@ $govuk-images-path: "/static/govuk-frontend/assets/images/";
 // import all GOVUK Frontend scss
 @import "all";
 
+@import "components/tags";
+
 $govuk-green-colour:  #006435;
 
 .results-table {
@@ -77,4 +79,29 @@ $govuk-green-colour:  #006435;
   display: block;
   font-size: govuk-em(16, 19);
   font-weight: 400;
+}
+
+// Subnav related styles
+
+.subnav__heading {
+  margin: 0;
+  padding: govuk-spacing(2) govuk-spacing(0) govuk-spacing(3);
+  color: $govuk-secondary-text-colour;
+  @include govuk-font(19);
+}
+
+.metadata-wrapper {
+  margin-right: $govuk-gutter-half;
+  margin-bottom: 1.5 * $govuk-gutter;
+  margin-left: $govuk-gutter-half;
+  padding-top: $govuk-gutter-half;
+  border-top: 1px solid $govuk-border-colour;
+}
+
+.metadata__item {
+  @include govuk-font(16);
+}
+
+.lead-para {
+  @include govuk-responsive-margin(9, "bottom");
 }

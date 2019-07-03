@@ -44,6 +44,16 @@ def fetch_results(url):
         return {}
 
 
+def fetch_validation_result(url):
+    try:
+        resp = requests.get(url)
+        data = resp.json()
+        return data
+    except Exception as e:
+        print(e)
+        return {}
+
+
 def sort_results(data):
     if data.get('Items') is not None:
         data['Items'].sort(key=lambda x: x['organisation'])

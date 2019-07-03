@@ -1,32 +1,84 @@
 {% extends "dlf-base.html" %}
 
+{% from "./govuk-jinja-components/details/macro.jinja" import govukDetails -%}
+
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
 {% block content %}
-<span class="govuk-caption-xl">Validation result</span>
-<h1 class="govuk-heading-xl">
-  {{ data.organisation | map_la_code_to_name }}
-</h1>
 
-<h3 class="govuk-heading-s">Validation result details</h3>
+{%- set development_mode = request.args.get('development_mode') -%}
 
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<span class="govuk-caption-xl">Validation result</span>
+		<h1 class="govuk-heading-xl">
+		  {{ data.organisation | map_la_code_to_name }}
+		</h1>
 
-    <p class="govuk-body">
-        This will be the detailed validation result from the validator. It will be the full result for the
-        latest validation run for {{ data.organisation | map_la_code_to_name }}.
-    </p>
+		<p class="govuk-body-l lead-para">The brownfield land register for {{ data.organisation | map_la_code_to_name }} contains errors.</p>
+	</div>
+</div>
 
-    <p class="govuk-body">It's up to this application to format the results.</p>
+<div class="govuk-grid-row">
+	<div class="metadata-wrapper">
+		<div class="metadata__item"><span>Last updated:</span> {{ data.result.last_updated }}</div>
+		<div class="metadata__item"><a href="{{ data.url }}">See raw results</a></div>
+	</div>
+</div>
 
-    <p class="govuk-body">
-        The api will need to provide an endpoint to get full validation results for the latest run of the
-        validator for this council.
-    </p>
+{% if data.result.latestValidationResult | length > 0 %}
 
-    <p class="govuk-body">
-        This will be the details of the result listed for this authority in the breakdown page. In other words the results
-    should line up correctly.
-    </p>
+	<h2 class="govuk-heading-l">Validation errors</h2>
+
+	<div class="govuk-grid-row">
+		<div class="govuk-grid-column-one-third">
+			<h4 class="subnav__heading">Rows with errors</h4>
+			<ul class="govuk-list">
+			{% for row in data.result.latestValidationResult %}
+				{% set row_number = loop.index %}
+				{% if row.validator.isRowValid == false %}
+				<li><a href="#row-{{ row_number }}-errors" class="govuk-link">Row {{ row_number }}</a></li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</div>
+		<div class="govuk-grid-column-two-thirds">
+			<ul class="govuk-list">
+			{% for row in data.result.latestValidationResult %}
+				{% set row_number = loop.index %}
+
+				{% if row.validator.isRowValid == false %}
+				<li>
+					<ul id="row-{{ row_number }}-errors" class="govuk-list">
+						{% for error in row.validator.rowErrors %}
+						<li>
+							<span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error.message }}
+							{%- if development_mode == 'true' -%}
+								{% set cell_name = error.dataPath | strip('.') %}
+								{%- set innerHtml -%}
+								<div>Value: {{ row[cell_name] }}</div>
+								<div>Output: {{ error }}</div>
+								{%- endset -%}
+
+								{{ govukDetails({
+								  "summaryText": "Validator output",
+								  "text": innerHtml
+								}) }}
+							{%- endif -%}
+						</li>
+						{% endfor %}
+					</ul>
+				</li>
+				{% endif %}
+
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+{% else %}
+	No results available
+{% endif %}
 
 {% endblock %}
 

@@ -5323,6 +5323,25 @@
   }
 }
 
+.govuk-tag--error {
+  background-color: #b10e1e;
+}
+
+.govuk-tag--warning {
+  background-color: #ffbf47;
+}
+
+.dl-tag {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background: #dee0e2;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .results-table {
   table-layout: fixed;
 }
@@ -5399,4 +5418,87 @@
   display: block;
   font-size: 0.84211em;
   font-weight: 400;
+}
+
+.subnav__heading {
+  margin: 0;
+  padding: 10px 0 15px;
+  color: #6f777b;
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+@media print {
+  .subnav__heading {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .subnav__heading {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.31579;
+  }
+}
+
+@media print {
+  .subnav__heading {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+
+.metadata-wrapper {
+  margin-right: 15px;
+  margin-bottom: 45px;
+  margin-left: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #bfc1c3;
+}
+
+.metadata__item {
+  font-family: "nta", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.14286;
+}
+
+@media print {
+  .metadata__item {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .metadata__item {
+    font-size: 16px;
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+}
+
+@media print {
+  .metadata__item {
+    font-size: 14pt;
+    line-height: 1.2;
+  }
+}
+
+.lead-para {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 40.0625em) {
+  .lead-para {
+    margin-bottom: 60px;
+  }
 }
