@@ -41,6 +41,8 @@ def register_filters(app):
     app.add_template_filter(strip)
     from application.filters import display_error_message
     app.add_template_filter(display_error_message)
+    from application.filters import count_row_errors
+    app.add_template_filter(count_row_errors)
 
 
 def register_extensions(app):

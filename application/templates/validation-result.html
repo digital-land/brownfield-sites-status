@@ -42,7 +42,7 @@
 			{% for row in data.result.latestValidationResult %}
 				{% set row_number = loop.index %}
 				{% if row.validator.isRowValid == false %}
-				<li><a href="#row-{{ row_number }}-errors" class="govuk-link">Row {{ row_number }}</a></li>
+				<li><a href="#row-{{ row_number }}-errors" class="govuk-link">Row {{ row_number }} ({{ row | count_row_errors }} errors)</a></li>
 				{% endif %}
 			{% endfor %}
 			</ul>
