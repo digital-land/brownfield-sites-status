@@ -105,3 +105,17 @@ $govuk-green-colour:  #006435;
 .lead-para {
   @include govuk-responsive-margin(9, "bottom");
 }
+
+// Validation results styles
+
+$code-inline-text-colour: $govuk-text-colour;
+$code-inline-bg-colour: #f8f8f8;
+
+.validation-error__item code {
+  padding: 0 5px;
+
+  color: $code-inline-text-colour;
+  background-color: $code-inline-bg-colour;
+  font-family: monospace;
+  font-size: 19px;
+}

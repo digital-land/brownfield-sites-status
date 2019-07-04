@@ -56,8 +56,8 @@
 				<li>
 					<ul id="row-{{ row_number }}-errors" class="govuk-list">
 						{% for error in row.validator.rowErrors %}
-						<li>
-							<span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error|display_error_message }}
+						<li class="validation-error__item">
+							<span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error|display_error_message|safe }}
 							{%- if development_mode == 'true' -%}
 								{% set cell_name = error.dataPath | strip('.') %}
 								{%- set innerHtml -%}
