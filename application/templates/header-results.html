@@ -1,0 +1,70 @@
+{% extends "dlf-base.html" %}
+
+{% from "./govuk-jinja-components/details/macro.jinja" import govukDetails -%}
+
+{% set mainClasses = "govuk-main-wrapper--l" %}
+
+{% block beforeContent %}
+{{ super()}}
+<a href="{{ url_for('frontend.breakdown') }}" class="govuk-back-link">Back to full list</a>
+{% endblock %}
+
+{% block content %}
+
+{%- set development_mode = request.args.get('development_mode') -%}
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<span class="govuk-caption-xl">Check for correct CSV headers</span>
+		<h1 class="govuk-heading-xl">
+		  {{ data.organisation | map_la_code_to_name }}
+		</h1>
+
+		<p class="govuk-body-l">The brownfield land register data standard specifics the headers expected in the CSV.</p>
+
+		<p class="govuk-body lead-para">Comparing the {{ data.organisation | map_la_code_to_name }} register to the data standard produced issues.</p>
+	</div>
+</div>
+
+<div class="govuk-grid-row">
+	<div class="metadata-wrapper">
+		<div class="metadata__item"><span>Last updated:</span> {{ data.result.last_updated }}</div>
+		<div class="metadata__item"><a href="{{ data.url }}">See raw results</a></div>
+	</div>
+</div>
+
+{% if data.result.headers %}
+
+	<h2 class="govuk-heading-l">Summary of headers</h2>
+
+	<div class="govuk-grid-row">
+		<div class="govuk-grid-column-one-half">
+			<h3 class="govuk-heading-m">Headers in CSV</h3>
+			<ul class="govuk-list govuk-list--number">
+				{% for header in data.result.headers.given %}
+				<li>{{ header }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="govuk-grid-column-one-half">
+			<h3 class="govuk-heading-m">Data standard headers</h3>
+			<ul class="govuk-list govuk-list--number">
+				{% for header in expected_headers %}
+				<li>{{ header }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+
+{% else %}
+	No results available
+{% endif %}
+
+{% endblock %}
+
+{% block bodyEnd %}
+<script>
+	console.log('{{ data }}');
+</script>
+{% endblock %}

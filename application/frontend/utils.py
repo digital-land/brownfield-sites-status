@@ -131,3 +131,35 @@ def summarise_results(url):
                 if i['validated']['isValid'] is True:
                     summary['valid'] += 1
     return {"last_updated": data.get('last_updated', datetime.today().date()), "summary": summary}
+
+
+data_standard_headers = [
+    "OrganisationURI",
+    "OrganisationLabel",
+    "SiteReference",
+    "PreviouslyPartOf",
+    "SiteNameAddress",
+    "SiteplanURL",
+    "CoordinateReferenceSystem",
+    "GeoX",
+    "GeoY",
+    "Hectares",
+    "OwnershipStatus",
+    "Deliverable",
+    "PlanningStatus",
+    "PermissionType",
+    "PermissionDate",
+    "PlanningHistory",
+    "ProposedForPIP",
+    "MinNetDwellings",
+    "DevelopmentDescription",
+    "NonHousingDevelopment",
+    "Part2",
+    "NetDwellingsRangeFrom",
+    "NetDwellingsRangeTo",
+    "HazardousSubstances",
+    "SiteInformation",
+    "Notes",
+    "FirstAddedDate",
+    "LastUpdatedDate"
+]
