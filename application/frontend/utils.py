@@ -57,11 +57,10 @@ def check_for_empty_and_yes_type(row):
         ('maxLength', 'should NOT be longer than 0 characters'),
         ('pattern', 'should match pattern "(yes)"'),
         ('anyOf', 'should match some schema in anyOf')]
-    lastField = ""
 
-    error_idxs = []
+    # summarise errors by field
+    # check if errors match above
     summary = dict()
-
     for idx, error in enumerate(row['validator']['rowErrors']):
         currentField = error['dataPath'].strip('.')
 
@@ -71,6 +70,8 @@ def check_for_empty_and_yes_type(row):
         if (error['keyword'], error['message']) in looking_for:
             summary[currentField].append(idx)
 
+    # if encountered fields have all 3 errors
+    # make new error to replace
     new_error_list = []
     to_remove = []
     for field in summary.keys():
@@ -78,6 +79,7 @@ def check_for_empty_and_yes_type(row):
             to_remove = to_remove + summary[field]
             new_error_list.append(make_empty_or_yes_error(field))
 
+    # keep all errors not flattened
     errors_to_keep = list(set(range(len(row['validator']['rowErrors']))) - set(to_remove))
     for idx in errors_to_keep:
         new_error_list.append(row['validator']['rowErrors'][idx])
