@@ -55,7 +55,8 @@
 				{% if row.validator.isRowValid == false %}
 				<li>
 					<ul id="row-{{ row_number }}-errors" class="govuk-list">
-						{% for error in row.validator.rowErrors %}
+					{% for error in row.validator.rowErrors %}
+						{%- if not error.keyword == 'format' or not error.params.format == 'date' -%}
 						<li class="validation-error__item">
 							<span class="govuk-tag govuk-tag--error">Row {{ row_number }}</span> Field: <span class="govuk-!-font-weight-bold">{{ error.dataPath | strip('.') }}</span> {{ error|display_error_message|safe }}
 							{%- if development_mode == 'true' -%}
@@ -71,7 +72,8 @@
 								}) }}
 							{%- endif -%}
 						</li>
-						{% endfor %}
+						{%- endif -%}
+					{% endfor %}
 					</ul>
 				</li>
 				{% endif %}
