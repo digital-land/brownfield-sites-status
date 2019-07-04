@@ -34,14 +34,26 @@ def result_details_for_authority(local_authority_id):
     return render_template('validation-result.html', data={'organisation': local_authority_id, 'url': url, 'result': result_data})
 
 
+def _check(given, expected):
+    checked = []
+    for field in given:
+        if field in expected:
+            checked.append((field, True))
+        else:
+            checked.append((field, False))
+    return checked
+
 @frontend.route('/local-authority/<local_authority_id>/header-details')
 def header_details_for_authority(local_authority_id):
-    # TODO we need a url for full result for latest validation run for this planning authority with all errors
     url = current_app.config['STATUS_API'] + '/?organisation=' + local_authority_id
     result_data = fetch_validation_result(url)
+    headers_given = result_data.get('headers').get('given', [])
+    checked = _check(headers_given, data_standard_headers)
+
     return render_template(
             'header-results.html',
             expected_headers=data_standard_headers,
+            checked=checked,
             data={'organisation': local_authority_id, 'url': url, 'result': result_data})
 
 

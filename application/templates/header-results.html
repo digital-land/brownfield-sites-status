@@ -33,7 +33,7 @@
 	</div>
 </div>
 
-{% if data.result.headers %}
+{% if checked %}
 
 	<h2 class="govuk-heading-l">Summary of headers</h2>
 
@@ -41,8 +41,8 @@
 		<div class="govuk-grid-column-one-half">
 			<h3 class="govuk-heading-m">Headers in CSV</h3>
 			<ul class="govuk-list govuk-list--number">
-				{% for header in data.result.headers.given %}
-				<li>{{ header }}</li>
+				{% for header in checked %}
+				    <li {% if not header[1] %}class="error" {% endif %}>{{ header[0] }}</li>
 				{% endfor %}
 			</ul>
 		</div>

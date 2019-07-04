@@ -131,3 +131,9 @@ $code-inline-bg-colour: #f8f8f8;
   font-family: monospace;
   font-size: 19px;
 }
+
+// Not sure where would be better for this Colm?
+.error {
+  color: govuk-colour("red");
+  background: rgba(govuk-colour("red") , .1);
+}
