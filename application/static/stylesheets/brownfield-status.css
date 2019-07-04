@@ -5503,6 +5503,16 @@
   }
 }
 
+.validation-list .validation-list__row {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #bfc1c3;
+}
+
+.validation-list .validation-error__list {
+  margin-bottom: 10px;
+}
+
 .validation-error__item code {
   padding: 0 5px;
   color: #0b0c0c;

@@ -48,13 +48,13 @@
 			</ul>
 		</div>
 		<div class="govuk-grid-column-two-thirds">
-			<ul class="govuk-list">
+			<ul class="govuk-list validation-list">
 			{% for row in data.result.latestValidationResult %}
 				{% set row_number = loop.index %}
 
 				{% if row.validator.isRowValid == false %}
-				<li>
-					<ul id="row-{{ row_number }}-errors" class="govuk-list">
+				<li class="validation-list__row">
+					<ul id="row-{{ row_number }}-errors" class="govuk-list validation-error__list">
 					{% for error in row.validator.rowErrors %}
 						{%- if not error.keyword == 'format' or not error.params.format == 'date' -%}
 						<li class="validation-error__item">
