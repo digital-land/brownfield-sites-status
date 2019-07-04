@@ -13,8 +13,6 @@ def strip(s, chars):
 
 
 def display_error_message(error):
-	print("ERROR")
-	print(error)
 	if 'Date' in error['dataPath'] and error['keyword'] == 'pattern':
 		return "should be in format YYYY-MM-DD"
 	return error['message']
