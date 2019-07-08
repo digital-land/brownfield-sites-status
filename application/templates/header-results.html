@@ -1,6 +1,7 @@
 {% extends "dlf-base.html" %}
 
 {% from "./govuk-jinja-components/details/macro.jinja" import govukDetails -%}
+{% from "./govuk-jinja-components/warning-text/macro.jinja" import govukWarningText -%}
 
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
@@ -58,7 +59,10 @@
 
 
 {% else %}
-	No results available
+	{{ govukWarningText({
+  		"text": "Unable to fetch results",
+  		"iconFallbackText": "Warning"
+	}) }}
 {% endif %}
 
 {% endblock %}

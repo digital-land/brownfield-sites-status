@@ -47,13 +47,17 @@ def _check(given, expected):
 def header_details_for_authority(local_authority_id):
     url = current_app.config['STATUS_API'] + '/?organisation=' + local_authority_id
     result_data = fetch_validation_result(url)
-    headers_given = result_data.get('headers').get('given', [])
-    checked = _check(headers_given, data_standard_headers)
-
-    return render_template(
+    if bool(result_data):
+        headers_given = result_data.get('headers').get('given', [])
+        checked = _check(headers_given, data_standard_headers)
+        return render_template(
             'header-results.html',
             expected_headers=data_standard_headers,
             checked=checked,
+            data={'organisation': local_authority_id, 'url': url, 'result': result_data})
+    else:
+        return render_template(
+            'header-results.html',
             data={'organisation': local_authority_id, 'url': url, 'result': result_data})
 
 
