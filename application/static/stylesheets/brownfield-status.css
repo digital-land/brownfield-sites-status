@@ -5520,3 +5520,12 @@
   font-family: monospace;
   font-size: 19px;
 }
+
+.field-present {
+  color: #bfc1c3;
+}
+
+.error {
+  color: #b10e1e;
+  background: rgba(177, 14, 30, 0.1);
+}

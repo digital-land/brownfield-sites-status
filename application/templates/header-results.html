@@ -1,6 +1,7 @@
 {% extends "dlf-base.html" %}
 
 {% from "./govuk-jinja-components/details/macro.jinja" import govukDetails -%}
+{% from "./govuk-jinja-components/warning-text/macro.jinja" import govukWarningText -%}
 
 {% set mainClasses = "govuk-main-wrapper--l" %}
 
@@ -33,16 +34,24 @@
 	</div>
 </div>
 
-{% if data.result.headers %}
+{% if checked %}
 
-	<h2 class="govuk-heading-l">Summary of headers</h2>
+	<div class="govuk-grid-row">
+		<div class="govuk-grid-column-two-thirds">
+			<h2 class="govuk-heading-l">Summary of headers</h2>
+			<div class="govuk-inset-text">
+		  		The column headings outlined in the <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/653657/BrownfieldLandRegisters_-_DataStandard.pdf">data standard</a> are case sensitive. Avoid common issues by checking spelling and case.
+			</div>
+		</div>
+	</div>
+	
 
 	<div class="govuk-grid-row">
 		<div class="govuk-grid-column-one-half">
 			<h3 class="govuk-heading-m">Headers in CSV</h3>
 			<ul class="govuk-list govuk-list--number">
-				{% for header in data.result.headers.given %}
-				<li>{{ header }}</li>
+				{% for header in checked %}
+				    <li {% if not header[1] %}class="error" {% endif %}>{{ header[0] }}</li>
 				{% endfor %}
 			</ul>
 		</div>
@@ -50,7 +59,7 @@
 			<h3 class="govuk-heading-m">Data standard headers</h3>
 			<ul class="govuk-list govuk-list--number">
 				{% for header in expected_headers %}
-				<li>{{ header }}</li>
+				<li {% if header[1] %}class="field-present" {% endif %}>{{ header[0] }} {% if header[1] %}<span class="govuk-visually-hidden">field is present in CSV</span>&#10004;{% endif %}</li>
 				{% endfor %}
 			</ul>
 		</div>
@@ -58,7 +67,10 @@
 
 
 {% else %}
-	No results available
+	{{ govukWarningText({
+  		"text": "Unable to fetch results",
+  		"iconFallbackText": "Warning"
+	}) }}
 {% endif %}
 
 {% endblock %}
