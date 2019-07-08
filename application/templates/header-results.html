@@ -51,7 +51,7 @@
 			<h3 class="govuk-heading-m">Data standard headers</h3>
 			<ul class="govuk-list govuk-list--number">
 				{% for header in expected_headers %}
-				<li>{{ header }}</li>
+				<li {% if header[1] %}class="field-present" {% endif %}>{{ header[0] }} {% if header[1] %}<span class="govuk-visually-hidden">field is present in CSV</span>&#10004;{% endif %}</li>
 				{% endfor %}
 			</ul>
 		</div>

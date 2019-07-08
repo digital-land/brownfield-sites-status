@@ -132,6 +132,10 @@ $code-inline-bg-colour: #f8f8f8;
   font-size: 19px;
 }
 
+.field-present {
+  color: govuk-colour("grey-2");
+}
+
 // Not sure where would be better for this Colm?
 .error {
   color: govuk-colour("red");
