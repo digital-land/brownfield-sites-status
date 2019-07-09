@@ -60,20 +60,20 @@
 		                  <td class="govuk-table__cell result-cell error">No
 		                  	<span class="test-result-link">(<a href="{{ url_for('frontend.header_details_for_authority', local_authority_id=item.organisation) }}"><span class="govuk-visually-hidden">See { item.organisation | map_la_code_to_name }} register validation </span>Results</a>)</span>
 		                  </td>
-		                  	<td class="govuk-table__cell result-cell error">-</td>
+		                  	<td class="govuk-table__cell result-cell">-</td>
 		                  {%- endif -%}
 
                     {%- else -%}
-	                    <td class="govuk-table__cell result-cell error">-</td>
-	                    <td class="govuk-table__cell result-cell error">-</td>
+	                    <td class="govuk-table__cell result-cell">-</td>
+	                    <td class="govuk-table__cell result-cell">-</td>
                     {%- endif -%}
                     
 
                 {% else %}
                     <td class="govuk-table__cell result-cell error">No</td>
-                    <td class="govuk-table__cell result-cell error">-</td>
-                    <td class="govuk-table__cell result-cell error">-</td>
-                    <td class="govuk-table__cell result-cell error">-</td>
+                    <td class="govuk-table__cell result-cell">-</td>
+                    <td class="govuk-table__cell result-cell">-</td>
+                    <td class="govuk-table__cell result-cell">-</td>
                 {% endif %}
 
             {% endif %}
