@@ -119,7 +119,7 @@ def summarise_results(url):
     summary = {"total": 0, "url": 0, "csv": 0, "headers": 0, "valid": 0}
     data = fetch_results(url)
     for item in data:
-        if item['validated'] is not None:
+        if item.get('validated') is not None:
             summary['total'] += 1
             if item['validated']['statusCode'] is 200:
                 summary['url'] += 1
