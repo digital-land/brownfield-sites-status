@@ -110,8 +110,8 @@ def fetch_validation_result(url):
 
 
 def sort_results(data):
-    if data.get('Items') is not None:
-        data['Items'].sort(key=lambda x: x['organisation'])
+    if data is not None:
+        data.sort(key=lambda x: x['organisation'])
     return data
 
 
