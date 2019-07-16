@@ -70,7 +70,7 @@ def header_details_for_authority(local_authority_id):
 def local_authority_results(local_authority_id):
     url = f"{current_app.config['STATUS_API']}?organisation={local_authority_id}"
     data = fetch_results(url)
-    data['results'].sort(key=lambda x: x['date'], reverse=True)
+    data.sort(key=lambda x: x['date'], reverse=True)
     return render_template('breakdown-by-authority.html', local_authority_id=local_authority_id, data=data, url=url)
 
 # set the assetPath variable for use in

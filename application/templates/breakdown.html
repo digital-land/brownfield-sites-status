@@ -23,7 +23,7 @@
 		</tr>
 	</thead>
 	<tbody class="govuk-table__body">
-		{% for item in data['Items'] %}
+		{% for item in data %}
 		<tr class="govuk-table__row {{ 'govuk-table__row--no-border' if development_mode == 'true' }}">
 			<td class="govuk-table__cell" colspan="2">
                 {{ item.organisation | map_la_code_to_name }}
