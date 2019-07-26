@@ -10,7 +10,7 @@
 
 {%- set development_mode = request.args.get('development_mode') -%}
 
-<p class="govuk-body"><span>Last updated:</span> {{ data.last_updated }}</p>
+<p class="govuk-body"><span>Last updated:</span> {{ data[0].date }}</p>
 
 <table class="govuk-table results-table">
 	<thead class="govuk-table__head">
@@ -98,6 +98,6 @@
 
 {% block bodyEnd %}
 <script>
-	console.log('{{ data }}');
+	//console.log({{ data | tojson }});
 </script>
 {% endblock %}
