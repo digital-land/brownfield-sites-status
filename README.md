@@ -22,6 +22,14 @@ Install front end build tool (gulp)
 
     npm install && gulp scss
 
+Create a db to store cached results
+
+    createdb brownfield_status
+
+Run migrations to set up db
+
+    flask db upgrade
+
 Run the app
 
     flask run
