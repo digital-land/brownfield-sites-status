@@ -53,7 +53,8 @@ def header_details_for_authority(local_authority_id):
     url = current_app.config['STATUS_API'] + '/?organisation=' + local_authority_id
     result_data = fetch_validation_result(url)
     if bool(result_data):
-        headers_given = result_data.get('headers').get('given', [])
+        # headers_given = result_data.get('headers').get('given', [])
+        headers_given = result_data[0].get('validated').get('result').get('columns').get('given', [])
         checked, checked_data_standard_headers = _check(headers_given, data_standard_headers)
         return render_template(
             'header-results.html',

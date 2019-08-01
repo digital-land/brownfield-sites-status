@@ -29,7 +29,7 @@
 
 <div class="govuk-grid-row">
 	<div class="metadata-wrapper">
-		<div class="metadata__item"><span>Last updated:</span> {{ data.result.last_updated }}</div>
+		<div class="metadata__item"><span>Last updated:</span> {{ data.result[0].date }}</div>
 		<div class="metadata__item"><a href="{{ data.url }}">See raw results</a></div>
 	</div>
 </div>
