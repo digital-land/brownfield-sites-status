@@ -30,7 +30,7 @@ def breakdown():
 def result_details_for_authority(local_authority_id):
     url = current_app.config['STATUS_API'] + '/?organisation=' + local_authority_id
     result_data = fetch_validation_result(url)
-    return render_template('validation-result.html', data={'organisation': local_authority_id, 'url': url, 'result': result_data})
+    return render_template('validation-result.html', data={'organisation': local_authority_id, 'url': url, 'result': result_data[0]})
 
 
 def _check(given, expected):

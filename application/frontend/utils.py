@@ -90,12 +90,21 @@ def check_for_empty_and_yes_type(row):
 
 
 def preprocess_validation_results(data):
-    data['_preprocessed'] = False
-    if len(data['latestValidationResult']) > 0:
-        data['_preprocessed'] = True
-        for idx, row in enumerate(data['latestValidationResult']):
+    latest_results = data[0]
+    latest_results['_preprocessed'] = False
+    # data['_preprocessed'] = False
+    # if len(data['latestValidationResult']) > 0:
+    #     data['_preprocessed'] = True
+    #     for idx, row in enumerate(data['latestValidationResult']):
+    #         if not row['validator']['isRowValid']:
+    #             data['latestValidationResult'][idx] = check_for_empty_and_yes_type(row)
+    if len(latest_results['validated']['result']['rows']) > 0:
+        latest_results['_preprocessed'] = True
+        for idx, row in enumerate(latest_results['validated']['result']['rows']):
             if not row['validator']['isRowValid']:
-                data['latestValidationResult'][idx] = check_for_empty_and_yes_type(row)
+                latest_results['validated']['result'][idx] = check_for_empty_and_yes_type(row)
+
+    data[0] =  latest_results
     return data
 
 
